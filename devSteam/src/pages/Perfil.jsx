@@ -1,6 +1,15 @@
-import React from "react";
+import { useState } from "react";
+import Cadastro from "../components/Cadastro";
 
 const Perfil = () => {
+const [mostrarCadastro, setMostrarCadastro] = useState(false);
+// const [mostrarCartao, setMostrarCartao] = useState(false);
+
+const handleMostrarCadastro = () => {
+  setMostrarCadastro(true);
+}
+
+
   return (
     <div className="d-flex container mt-4 gap-4">
       <button
@@ -32,40 +41,45 @@ const Perfil = () => {
             aria-label="Close"
           ></button>
         </div>
-        <div class="offcanvas-body">
-          <div className="itensPerfil rounded-4 p-2">
-            <p className="fw-bold m-0">Cadastro</p>
-            <p className="m-0 ">ver e alterar seus dados</p>
-          </div>
+        <button
+          className="itensPerfil rounded-4 p-2 btn text-start"
+          onClick={handleMostrarCadastro}
+        >
+          <p className="fw-bold m-0">Cadastro</p>
+          <p className="m-0">ver e alterar seus dados</p>
+        </button>
 
-          <div className="itensPerfil rounded-4 p-2">
-            <p className="fw-bold m-0">Cartões</p>
-            <p className="m-0 ">ver seus catões cadastrados</p>
-          </div>
-        </div>
+        <button className="itensPerfil rounded-4 p-2 btn text-start">
+          <p className="fw-bold m-0">Cartões</p>
+          <p className="m-0">ver seus cartões cadastrados</p>
+        </button>
       </div>
 
       {/* Parte dektop */}
       <div
-        className="d-none  d-md-flex flex-column gap-3"
-        style={{ width: "200px" }}
-      >
-        <div className="itensPerfil rounded-4 p-2">
+      className="d-flex align-items-start g-4 "
+    >
+      {/* Coluna de Botões */}
+      <div className="btnPerfil d-flex flex-column gap-3">
+        <button
+          className="itensPerfil rounded-4 p-2 btn text-start"
+          onClick={handleMostrarCadastro}
+        >
           <p className="fw-bold m-0">Cadastro</p>
-          <p className="m-0 ">ver e alterar seus dados</p>
-        </div>
+          <p className="m-0">ver e alterar seus dados</p>
+        </button>
 
-        <div className="itensPerfil rounded-4 p-2">
+        <button className="itensPerfil rounded-4 p-2 btn text-start">
           <p className="fw-bold m-0">Cartões</p>
-          <p className="m-0 ">ver seus catões cadastrados</p>
-        </div>
+          <p className="m-0">ver seus cartões cadastrados</p>
+        </button>
       </div>
 
-      <div className="w-75">
-        <h4>Cadastro</h4>
-        <p>nome</p>
-        <p>email</p>
-      </div>
+      {/* Renderiza o componente Cadastro ao lado */}
+      {mostrarCadastro && <Cadastro />}
+    </div>
+
+      
     </div>
   );
 };
