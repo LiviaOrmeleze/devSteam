@@ -10,8 +10,9 @@ import App from "./App.jsx";
 import Login from "./pages/Login.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import { formatarMoeda } from "./utils/formatters.js";
+import RotaProtegida from "./components/ProtectedRoute.jsx";
+import SignUp from "./pages/SingUp.jsx";
 
-// Contexto global acessível a todas as rotas
 export const GlobalContext = createContext(null);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -21,7 +22,23 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/cadastro" element={<SignUp />} />
+          <Route
+            path="/checkout"
+            element={
+              <RotaProtegida tipoPermitido="CLIENTE">
+                <Checkout />
+              </RotaProtegida>
+            }
+          />
+          <Route
+            path="/painel"
+            element={
+              <RotaProtegida tipoPermitido="ADMIN">
+                <h1 className="text-center mt-5">Painel do Admin</h1>
+              </RotaProtegida>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </GlobalContext.Provider>

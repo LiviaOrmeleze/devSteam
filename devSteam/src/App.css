@@ -1,47 +1,74 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-  font-family: "Inter", sans-serif;
-  background-color: #1b2838;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  background-color: #0f172a;
   color: #fff;
 }
 
-.buscar,
-.buscar::placeholder {
-  background-color: #2a475e;
-  color: #d7d7d7;
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #0f172a;
 }
 
-.promoCard {
-  width: 280px;
-  transition: transform 0.2s;
-  background: linear-gradient(to bottom, #19587b, #2b87ae);
+.auth-box {
+  background: #1e293b;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 
-.promoCard:hover {
-  transform: scale(1.03);
+.auth-box h2 {
+  color: #fff;
+  margin-bottom: 24px;
 }
 
-.desconto {
-  background-color: #4c6b22;
-  color: #beeb14;
+.auth-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
-.corValor {
-  color: #beeb14;
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
 }
 
-#addCarrinho:hover {
-  background-color: #547625;
+.auth-button:hover {
+  background-color: #2563eb;
 }
 
-#addCarrinho:disabled {
-  background-color: #4c6b22;
+.auth-link {
+  margin-top: 20px;
+  color: #fff;
 }
 
-input.form-control:focus {
-  box-shadow: none;
+.auth-link a {
+  color: #3b82f6;
+  font-weight: bold;
+  text-decoration: none;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
 }

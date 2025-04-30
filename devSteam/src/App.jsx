@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
-
-import "./App.css";
-
 import Header from "./components/Header";
 import Promotion from "./components/Promotion";
 import CarrinhoOffCanvas from "./components/CarrinhoOffCanvas";
+import { useNavigate } from "react-router";
+import "./App.css";
 import OutrosJogos from "./components/OutrosJogos";
 
 function App() {
   const [carrinhoItem, setCarrinhoItem] = useState([]);
-
-  useEffect(() => {
-    localStorage.setItem("devcarrinho", JSON.stringify(carrinhoItem));
-  }, [carrinhoItem]);
+  const [usuario, setUsuario] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const salvaCarrinho = localStorage.getItem("devcarrinho");
-    salvaCarrinho && setCarrinhoItem(JSON.parse(salvaCarrinho));
-  }, []);
+    if (salvaCarrinho) {
+      setCarrinhoItem(JSON.parse(salvaCarrinho));
+    }
 
-  // console.log(localStorage.getItem("devcarrinho"));
+    const usuarioLogado = localStorage.getItem("usuarioLogado");
+    if (usuarioLogado) {
+      setUsuario(JSON.parse(usuarioLogado));
+    }
+  }, []);
 
   const handleAddCarrinho = (produto) => {
     setCarrinhoItem((itemAnterior) => {
@@ -52,19 +54,54 @@ function App() {
     );
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("usuarioLogado");
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    localStorage.setItem("devcarrinho", JSON.stringify(carrinhoItem));
+  }, [carrinhoItem]);
+
   return (
     <>
-      <Header contadorJogos={carrinhoItem.length} />
-      <Promotion
-        onAddCarrinho={handleAddCarrinho} //adicionando o click para promoção
+      <Header
+        contadorJogos={carrinhoItem.reduce(
+          (acc, item) => acc + item.quantidade,
+          0
+        )}
+        usuario={usuario}
       />
-
       <CarrinhoOffCanvas
+        carrinhoItem={carrinhoItem}
         onRemoveCarrinho={handleRemoveCarrinho}
         onUpdateCarrinho={handleUpdateCarrinho}
-        carrinhoItem={carrinhoItem}
       />
-      <OutrosJogos />
+      {usuario?.tipo === "ADMIN" ? (
+        <div className="admin-dashboard">
+          <h1>Bem-vindo ao Painel de Administração</h1>
+          <nav>
+            <ul>
+              <li>
+                <button onClick={() => navigate("/perfil")}>Perfil</button>
+              </li>
+              <li>
+                <button onClick={() => navigate("/editar-jogos")}>
+                  Editar Jogos
+                </button>
+              </li>
+              <li>
+                <button onClick={handleLogout}>Sair</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      ) : (
+        <div className="container">
+          <Promotion onAddCarrinho={handleAddCarrinho} />
+          <OutrosJogos />
+        </div>
+      )}
     </>
   );
 }
