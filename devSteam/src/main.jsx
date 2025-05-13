@@ -12,6 +12,9 @@ import Checkout from "./pages/Checkout.jsx";
 import { formatarMoeda } from "./utils/formatters.js";
 import RotaProtegida from "./components/ProtectedRoute.jsx";
 import SignUp from "./pages/SingUp.jsx";
+import EditarJogos from "./components/EditarJogos.jsx";
+import AdicionarJogo from "./components/AdicionarJogo.jsx";
+import Edicao from "./components/Edicao.jsx";
 
 export const GlobalContext = createContext(null);
 
@@ -23,6 +26,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<SignUp />} />
+          <Route path="/editar-jogo" element={<EditarJogos />} />
+          <Route path="/adicionar-jogo" element={<AdicionarJogo />} />
+          <Route patch="/editar-game" elemente={<Edicao />} />
           <Route
             path="/checkout"
             element={

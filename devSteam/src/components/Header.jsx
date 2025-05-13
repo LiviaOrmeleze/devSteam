@@ -53,7 +53,7 @@ const Header = ({ contadorJogos, usuario }) => {
               <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                 {usuario.tipo === "Administrador" && (
                   <li>
-                    <Link to="/jogos" className="dropdown-item">
+                    <Link to="/editar-jogo" className="dropdown-item">
                       Jogos
                     </Link>
                   </li>

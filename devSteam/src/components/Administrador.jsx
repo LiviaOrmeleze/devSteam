@@ -1,30 +1,20 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
-const AdminDashboard = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("usuarioLogado"); // Removendo usuário logado no logout
-    navigate("/login"); // Redireciona para o login após logout
-  };
-
+const Administrador = () => {
   return (
-    <div className="admin-dashboard container mt-5">
-      <h1>Painel de Administração</h1>
-      <ul className="nav flex-column">
-        <li>
-          <button onClick={() => navigate("/perfil")} className="btn btn-outline-light my-2">Perfil</button>
-        </li>
-        <li>
-          <button onClick={() => navigate("/editar-jogos")} className="btn btn-outline-warning my-2">Editar Jogos</button>
-        </li>
-        <li>
-          <button onClick={handleLogout} className="btn btn-outline-danger my-2">Sair</button>
-        </li>
-      </ul>
+    <div className="container mt-5">
+      <h1>Painel do Administrador</h1>
+      <div className="list-group mt-4">
+        <Link to="/adicionar-jogo" className="list-group-item list-group-item-action">
+          Adicionar Jogo
+        </Link>
+        <Link to="/editar-jogos" className="list-group-item list-group-item-action">
+          Editar Jogos
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default AdminDashboard;
+export default Administrador;
